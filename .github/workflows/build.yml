@@ -1,0 +1,38 @@
+name: Build Electron App
+
+on:
+  push:
+    branches:
+      - main  # Change to your default branch if different
+  pull_request:
+    branches:
+      - main  # Triggers on PRs targeting the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # You can use 'macos-latest' if you need macOS
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'  # Specify the Node.js version you are using
+
+      - name: Install dependencies
+        run: npm install  # Change to 'yarn install' if you use Yarn
+
+      - name: Build the Electron app
+        run: npm run build  # Adjust this command if your build script is named differently
+
+      - name: Package the app
+        run: npm run dist  # This should run the command to package your app
+
+      - name: Upload Release Assets
+        uses: ncipollo/release-action@v1
+        with:
+          tag: 'v${{ github.run_number }}'  # Tag for the release
+          files: |
+            dist/mac/*.dmg  # Adjust to match your output files

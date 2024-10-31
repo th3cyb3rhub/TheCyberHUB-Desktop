@@ -1,0 +1,24 @@
+{
+  "name": "thecyberhub-desktop",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "description": "A desktop application for TheCyberHUB website",
+  "author": "Your Name",
+  "scripts": {
+    "start": "electron .",
+    "build": "vite build",
+    "package": "electron-builder"
+  },
+  "build": {
+    "appId": "com.thecyberhub.desktop",
+    "files": [
+      "dist/**/*",
+      "src/main.js"
+    ],
+    "icon": "https://ap-south-1.console.aws.amazon.com/s3/object/thecyberhub-assets?region=ap-south-1&bucketType=general&prefix=thecyberhub-assets/assets/images/th3cyb3rhub-fav.png"
+  },
+  "devDependencies": {
+    "electron": "^33.0.2",
+    "electron-builder": "^25.1.8"
+  }
+}
