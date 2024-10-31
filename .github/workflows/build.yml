@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout thecyberhub-desktop code
+      - name: Checkout TheCyberHUB-Desktop code
         uses: actions/checkout@v2
 
       - name: Checkout thecyberhub gh-pages code
