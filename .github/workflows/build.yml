@@ -47,3 +47,5 @@ jobs:
           tag: 'v${{ github.run_number }}'
           files: |
             dist/mac/*.dmg  # Adjust this to your actual build output
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Make the token available in the environment
