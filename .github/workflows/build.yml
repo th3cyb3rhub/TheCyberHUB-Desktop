@@ -29,14 +29,12 @@ jobs:
           node-version: '18'
 
       - name: Clear Electron Builder Cache
-        run: rm -rf $HOME/.cache/electron-builder  # Clear the cache to prevent conflicts
+        run: rm -rf $HOME/.cache/electron-builder
 
-      - name: Copy TheCyberHUB build files
+      - name: Copy thecyberhub build files
         run: |
           mkdir -p dist  # Create the dist directory if it doesn't exist
           cp -R gh-pages/* ./  # Copy files from the 'gh-pages' directory to the current working directory
-          # Optionally, you can specify specific files to copy, e.g.:
-          # cp -R gh-pages/index.html ./  # Adjust this as needed
 
       - name: Install dependencies
         run: npm install
