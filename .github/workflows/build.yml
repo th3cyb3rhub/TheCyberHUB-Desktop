@@ -32,7 +32,8 @@ jobs:
         run: |
           mkdir -p dist  # Create the dist directory if it doesn't exist
           cp -R gh-pages/* ./  # Copy files from the 'gh-pages' directory to the current working directory
-          cp -R gh-pages/.* ./  # Copy hidden files if necessary
+          # Optionally, you can specify specific files to copy, e.g.:
+          # cp -R gh-pages/index.html ./  # Adjust this as needed
 
       - name: Install dependencies
         run: npm install
