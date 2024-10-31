@@ -28,6 +28,9 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Clear Electron Builder Cache
+        run: rm -rf $HOME/.cache/electron-builder  # Clear the cache to prevent conflicts
+
       - name: Copy thecyberhub build files
         run: |
           mkdir -p dist  # Create the dist directory if it doesn't exist

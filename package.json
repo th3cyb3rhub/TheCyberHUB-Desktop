@@ -14,7 +14,7 @@
       "dist/**/*",
       "src/main.js"
     ],
-    "icon": "https://ap-south-1.console.aws.amazon.com/s3/object/thecyberhub-assets?region=ap-south-1&bucketType=general&prefix=thecyberhub-assets/assets/images/th3cyb3rhub-fav.png"
+    "icon": "dict/assets/th3cyb3rhub-fav.png"
   },
   "devDependencies": {
     "electron": "^33.0.2",
