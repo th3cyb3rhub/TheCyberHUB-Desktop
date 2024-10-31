@@ -6,7 +6,6 @@
   "author": "Your Name",
   "scripts": {
     "start": "electron .",
-    "build": "vite build",
     "package": "electron-builder"
   },
   "build": {

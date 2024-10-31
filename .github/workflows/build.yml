@@ -38,9 +38,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build the Electron app
-        run: npm run build  # Ensure your build script is set up correctly in package.json
-
       - name: Package the app
         run: npm run dist  # Ensure your dist script is set up correctly in package.json
 
