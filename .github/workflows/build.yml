@@ -21,12 +21,12 @@ jobs:
         with:
           repository: th3cyb3rhub/TheCyberHUB
           ref: gh-pages
-          path: gh-pages  # Check out into a subdirectory
+          path: ./  # Check out into a subdirectory
 
       - name: Copy content from gh-pages to current directory
         run: |
           if (Test-Path "gh-pages") {
-              Copy-Item -Recurse -Force "gh-pages/*" "."
+              Copy-Item -Recurse -Force "./*" "."
           } else {
               Write-Host "gh-pages directory does not exist."
           }
