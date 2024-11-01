@@ -9,7 +9,8 @@
   "scripts": {
     "start": "electron .",
     "package": "electron-builder",
-    "build": "electron-builder --win --mac --linux",
+    "build": "electron-builder --win --linux",
+    "build:mac": "npm install --no-optional && electron-builder --mac",
     "lint": "eslint .",
     "test": "echo \"No tests specified\" && exit 0"
   },
