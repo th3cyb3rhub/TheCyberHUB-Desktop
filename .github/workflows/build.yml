@@ -39,19 +39,24 @@ jobs:
           # Copy necessary files into the dist directory
           Copy-Item -Recurse -Path "temp/*" -Destination "dist" -Force
 
+      - name: Update paths in HTML and JS files
+        run: |
+          # Update paths in HTML files
+          Get-ChildItem dist\*.html | ForEach-Object {
+              (Get-Content $_.FullName) `
+                  -replace 'src="(/assets/)', 'src="./assets/' `
+                  -replace 'href="(/assets/)', 'href="./assets/' | Set-Content $_.FullName
+          }
+          
+          # Update paths in JS files inside the assets folder
+          Get-ChildItem dist\assets\*.js | ForEach-Object {
+              (Get-Content $_.FullName) `
+                  -replace '("/assets/)', '("./assets/' | Set-Content $_.FullName
+          }
+
       - name: List files in the dist directory after copying
         run: |
           Get-ChildItem dist
-
-      - name: Update HTML files to include './' in src/href attributes
-        run: |
-          Get-ChildItem dist\*.html | ForEach-Object {
-              (Get-Content $_.FullName) -replace 'src="(/assets/)', 'src="./assets/' -replace 'href="(/assets/)', 'href="./assets/' | Set-Content $_.FullName
-          }
-
-      - name: List updated HTML files
-        run: |
-          Get-ChildItem dist\*.html
 
       - name: Clear Electron Builder Cache
         run: |
