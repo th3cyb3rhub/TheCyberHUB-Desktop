@@ -9,10 +9,10 @@
   "scripts": {
     "start": "electron .",
     "package": "electron-builder",
-    "build": "npm run build:linux && npm run build:windows && npm run build:mac", // Updated build script
+    "build": "npm run build:linux && npm run build:windows && npm run build:mac",
     "build:linux": "electron-builder --linux AppImage -p never",
     "build:windows": "electron-builder --win nsis -p never",
-    "build:mac": "npm install --no-optional && electron-builder --mac -p never", // Install without optional
+    "build:mac": "npm install --no-optional && electron-builder --mac -p never",
     "lint": "eslint .",
     "test": "echo \"No tests specified\" && exit 0"
   },
