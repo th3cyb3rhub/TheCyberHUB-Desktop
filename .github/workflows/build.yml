@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # Change to windows-latest
+    runs-on: windows-latest  # Using Windows runner
 
     steps:
       - name: Checkout code
@@ -22,7 +22,7 @@ jobs:
           node-version: '18'
 
       - name: Clear Electron Builder Cache
-        run: rm -rf $HOME/.cache/electron-builder
+        run: Remove-Item -Recurse -Force "$HOME\.cache\electron-builder"
 
       - name: Install dependencies
         run: npm install
@@ -49,4 +49,4 @@ jobs:
       - name: Cleanup
         run: |
           echo "Cleaning up build artifacts"
-          rm -rf dist
+          Remove-Item -Recurse -Force dist
