@@ -1,5 +1,5 @@
 {
-  "name": "TheCyberHUB-Desktop",
+  "name": "TheCyberHUB",
   "version": "1.0.0",
   "description": "A desktop application for TheCyberHUB website",
   "main": "src/main.js",
