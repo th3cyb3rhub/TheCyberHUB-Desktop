@@ -49,4 +49,4 @@ jobs:
           files: |
             dist/mac/*.dmg  # Adjust this to your actual build output
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # test
