@@ -46,7 +46,7 @@ jobs:
           name: 'TheCyberHUB Desktop Release v${{ github.run_number }}'
           artifacts: |
             dist/*.exe
-          token: ${{ secrets.GH_TOKEN }}  # Use your PAT here
+          token: ${{ secrets.PAT_TOKEN }}  # Use your PAT here
           skipIfReleaseExists: true  # Skip if the release already exists
 
       # Optional: Clean up after the build
