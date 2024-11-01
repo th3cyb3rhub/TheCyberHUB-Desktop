@@ -13,15 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout TheCyberHUB-Desktop code
+      - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Checkout TheCyberHUB gh-pages code
-        uses: actions/checkout@v2
-        with:
-          repository: th3cyb3rhub/TheCyberHUB  # Replace with your GitHub username and repo name
-          ref: gh-pages  # Check out the gh-pages branch
-          path: gh-pages  # Place the contents in a 'gh-pages' directory
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -31,22 +24,25 @@ jobs:
       - name: Clear Electron Builder Cache
         run: rm -rf $HOME/.cache/electron-builder
 
-      - name: Copy thecyberhub build files
-        run: |
-          mkdir -p dist  # Create the dist directory if it doesn't exist
-          cp -R gh-pages/* ./  # Copy files from the 'gh-pages' directory to the current working directory
-
       - name: Install dependencies
         run: npm install
 
-      - name: Package the app
-        run: npm run package
+      - name: Package the app for Linux, Windows, and macOS
+        run: |
+          # Build for Linux, Windows, and macOS without publishing
+          npx electron-builder --linux AppImage --win nsis --mac dmg -p never
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Use your GitHub token with write permissions
 
       - name: Upload Release Assets
         uses: ncipollo/release-action@v1
         with:
           tag: 'v${{ github.run_number }}'
+          name: 'TheCyberHUB Desktop Release v${{ github.run_number }}'
           files: |
-            dist/mac/*.dmg  # Adjust this to your actual build output
+            dist/*.AppImage
+            dist/*.exe
+            dist/*.dmg
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # test
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
