@@ -14,16 +14,17 @@ function createWindow() {
     win.loadFile(path.join(__dirname, '../dist/index.html'));
 }
 
-app.whenReady().then(createWindow);
-
+// Quit the application when all windows are closed
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
+    app.quit();
 });
 
+// Create a window when the application is activated
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
 });
+
+// Start the application and create the window
+app.whenReady().then(createWindow);

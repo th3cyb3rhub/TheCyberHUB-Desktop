@@ -9,10 +9,8 @@
   "scripts": {
     "start": "electron .",
     "package": "electron-builder",
-    "build": "npm run build:linux && npm run build:windows",
-    "build:linux": "electron-builder --linux AppImage -p never",
+    "build": "npm run build:windows",
     "build:windows": "electron-builder --win nsis -p never",
-    "build:mac": "npm install --no-optional && electron-builder --mac -p never",
     "lint": "eslint .",
     "test": "echo \"No tests specified\" && exit 0"
   },
@@ -23,17 +21,6 @@
       "src/main.js"
     ],
     "icon": "dict/assets/th3cyb3rhub-fav.png",
-    "mac": {
-      "category": "public.app-category.utilities",
-      "target": [
-        "dmg"
-      ]
-    },
-    "linux": {
-      "target": [
-        "AppImage"
-      ]
-    },
     "win": {
       "target": [
         "nsis"

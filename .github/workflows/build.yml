@@ -27,10 +27,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Package the app for Linux, Windows, and macOS
+      - name: Package the app for Windows
         run: |
-          # Build for Linux, Windows, and macOS without publishing
-          npx electron-builder --linux AppImage --win nsis --mac dmg -p never
+          # Build for Windows without publishing
+          npx electron-builder --win nsis -p never
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Use your GitHub token with write permissions
 
@@ -40,9 +40,7 @@ jobs:
           tag: 'v${{ github.run_number }}'
           name: 'TheCyberHUB Desktop Release v${{ github.run_number }}'
           files: |
-            dist/*.AppImage
             dist/*.exe
-            dist/*.dmg
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
