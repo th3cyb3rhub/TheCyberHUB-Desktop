@@ -22,7 +22,12 @@ jobs:
           node-version: '18'
 
       - name: Clear Electron Builder Cache
-        run: Remove-Item -Recurse -Force "$HOME\.cache\electron-builder"
+        run: |
+          if (Test-Path "$HOME\.cache\electron-builder") {
+              Remove-Item -Recurse -Force "$HOME\.cache\electron-builder"
+          } else {
+              Write-Host "Cache directory does not exist, skipping removal."
+          }
 
       - name: Install dependencies
         run: npm install
