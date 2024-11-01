@@ -24,8 +24,12 @@ jobs:
       - name: Clone the gh-pages branch
         run: |
           git clone --single-branch --branch gh-pages https://github.com/th3cyb3rhub/TheCyberHUB.git temp
+          # Remove existing directories before copying
+          if (Test-Path ".github") {
+              Remove-Item -Recurse -Force ".github"
+          }
           # Copy necessary files into your source directory
-          cp -R temp/* .  # Adjust this if needed
+          Copy-Item -Recurse temp/* .
 
       - name: Clear Electron Builder Cache
         run: |
