@@ -46,3 +46,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Optional: Clean up after the build
+      - name: Cleanup
+        run: |
+          echo "Cleaning up build artifacts"
+          rm -rf dist

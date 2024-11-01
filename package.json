@@ -1,12 +1,17 @@
 {
-  "name": "thecyberhub-desktop",
+  "name": "TheCyberHUB-Desktop",
   "version": "1.0.0",
-  "main": "src/main.js",
   "description": "A desktop application for TheCyberHUB website",
+  "main": "src/main.js",
   "author": "Your Name",
+  "license": "MIT",
+  "homepage": "https://thecyberhub.com",
   "scripts": {
     "start": "electron .",
-    "package": "electron-builder"
+    "package": "electron-builder",
+    "build": "electron-builder --win --mac --linux",
+    "lint": "eslint .",
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "build": {
     "appId": "com.thecyberhub.desktop",
@@ -14,10 +19,41 @@
       "dist/**/*",
       "src/main.js"
     ],
-    "icon": "dict/assets/th3cyb3rhub-fav.png"
+    "icon": "dict/assets/th3cyb3rhub-fav.png",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        "dmg"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "th3cyb3rhub",
+      "repo": "TheCyberHUB-Desktop",
+      "releaseType": "release"
+    }
   },
   "devDependencies": {
+    "dmg-license": "^1.0.11",
     "electron": "^33.0.2",
-    "electron-builder": "^25.1.8"
+    "electron-builder": "^25.1.8",
+    "eslint": "^8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/th3cyb3rhub/TheCyberHUB-Desktop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/th3cyb3rhub/TheCyberHUB-Desktop/issues"
   }
 }
