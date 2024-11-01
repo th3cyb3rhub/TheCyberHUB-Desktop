@@ -10,38 +10,27 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # Using Windows runner
+    runs-on: windows-latest
 
     steps:
-      - name: Checkout main code
+      - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Checkout gh-pages branch
-        uses: actions/checkout@v2
-        with:
-          repository: th3cyb3rhub/TheCyberHUB
-          ref: gh-pages
-          path: ./  # Check out into a subdirectory
-
-      - name: Copy content from gh-pages to current directory
-        run: |
-          if (Test-Path "gh-pages") {
-              Copy-Item -Recurse -Force "./*" "."
-          } else {
-              Write-Host "gh-pages directory does not exist."
-          }
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '18'
 
+      - name: Clone the gh-pages branch
+        run: |
+          git clone --single-branch --branch gh-pages https://github.com/th3cyb3rhub/TheCyberHUB.git temp
+          # Copy necessary files into your source directory
+          cp -R temp/* .  # Adjust this if needed
+
       - name: Clear Electron Builder Cache
         run: |
           if (Test-Path "$HOME\.cache\electron-builder") {
               Remove-Item -Recurse -Force "$HOME\.cache\electron-builder"
-          } else {
-              Write-Host "Cache directory does not exist, skipping removal."
           }
 
       - name: Install dependencies
@@ -49,7 +38,6 @@ jobs:
 
       - name: Package the app for Windows
         run: |
-          # Build for Windows without publishing
           npx electron-builder --win nsis -p never
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -62,10 +50,9 @@ jobs:
           artifacts: |
             dist/*.exe
           token: ${{ secrets.PAT_TOKEN }}  # Use your PAT here
-          skipIfReleaseExists: true  # Skip if the release already exists
+          skipIfReleaseExists: true
 
-      # Optional: Clean up after the build
       - name: Cleanup
         run: |
           echo "Cleaning up build artifacts"
-          Remove-Item -Recurse -Force dist
+          Remove-Item -Recurse -Force dist/*
