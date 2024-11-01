@@ -43,6 +43,16 @@ jobs:
         run: |
           Get-ChildItem dist
 
+      - name: Update HTML files to include './' in src/href attributes
+        run: |
+          Get-ChildItem dist\*.html | ForEach-Object {
+              (Get-Content $_.FullName) -replace 'src="(/assets/)', 'src="./assets/' -replace 'href="(/assets/)', 'href="./assets/' | Set-Content $_.FullName
+          }
+
+      - name: List updated HTML files
+        run: |
+          Get-ChildItem dist\*.html
+
       - name: Clear Electron Builder Cache
         run: |
           if (Test-Path "$HOME\.cache\electron-builder") {
