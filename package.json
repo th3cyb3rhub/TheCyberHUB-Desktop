@@ -24,7 +24,8 @@
     "win": {
       "target": [
         "nsis"
-      ]
+      ],
+      "sign": false
     },
     "publish": {
       "provider": "github",
