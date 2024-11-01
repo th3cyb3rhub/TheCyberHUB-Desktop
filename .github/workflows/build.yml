@@ -37,7 +37,7 @@ jobs:
           # Build for Windows without publishing
           npx electron-builder --win nsis -p never
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Use your GitHub token with write permissions
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Upload Release Assets
         uses: ncipollo/release-action@v1
@@ -46,8 +46,8 @@ jobs:
           name: 'TheCyberHUB Desktop Release v${{ github.run_number }}'
           artifacts: |
             dist/*.exe
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Ensure this token has the necessary permissions
+          token: ${{ secrets.GH_TOKEN }}  # Use your PAT here
+          skipIfReleaseExists: true  # Skip if the release already exists
 
       # Optional: Clean up after the build
       - name: Cleanup
