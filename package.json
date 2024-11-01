@@ -9,8 +9,10 @@
   "scripts": {
     "start": "electron .",
     "package": "electron-builder",
-    "build": "electron-builder --win --linux",
-    "build:mac": "npm install --no-optional && electron-builder --mac",
+    "build": "npm run build:linux && npm run build:windows && npm run build:mac", // Updated build script
+    "build:linux": "electron-builder --linux AppImage -p never",
+    "build:windows": "electron-builder --win nsis -p never",
+    "build:mac": "npm install --no-optional && electron-builder --mac -p never", // Install without optional
     "lint": "eslint .",
     "test": "echo \"No tests specified\" && exit 0"
   },
@@ -48,9 +50,6 @@
     "electron": "^33.0.2",
     "electron-builder": "^25.1.8",
     "eslint": "^8.0.0"
-  },
-  "optionalDependencies": {
-    "dmg-license": "^1.0.11"
   },
   "repository": {
     "type": "git",
