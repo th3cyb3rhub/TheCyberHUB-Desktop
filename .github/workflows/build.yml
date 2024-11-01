@@ -26,16 +26,22 @@ jobs:
           git clone --single-branch --branch gh-pages https://github.com/th3cyb3rhub/TheCyberHUB.git temp
           # List the contents of the temp directory to verify files are present
           Get-ChildItem temp
+          
           # Check if the target folder exists and remove if necessary
           if (Test-Path ".github") {
               Remove-Item -Recurse -Force ".github"
           }
-          # Copy necessary files into your source directory
-          Copy-Item -Recurse -Path "temp/*" -Destination "." -Force
+          # Create the dist directory if it doesn't exist
+          if (-Not (Test-Path "dist")) {
+              New-Item -ItemType Directory -Path "dist"
+          }
 
-      - name: List files after copying
+          # Copy necessary files into the dist directory
+          Copy-Item -Recurse -Path "temp/*" -Destination "dist" -Force
+
+      - name: List files in the dist directory after copying
         run: |
-          Get-ChildItem
+          Get-ChildItem dist
 
       - name: Clear Electron Builder Cache
         run: |
