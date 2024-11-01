@@ -44,11 +44,10 @@ jobs:
         with:
           tag: 'v${{ github.run_number }}'
           name: 'TheCyberHUB Desktop Release v${{ github.run_number }}'
-          files: |
+          artifacts: |
             dist/*.exe
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Ensure this token has the necessary permissions
 
       # Optional: Clean up after the build
       - name: Cleanup
