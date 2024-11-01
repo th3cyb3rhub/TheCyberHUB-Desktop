@@ -13,8 +13,23 @@ jobs:
     runs-on: windows-latest  # Using Windows runner
 
     steps:
-      - name: Checkout code
+      - name: Checkout main code
         uses: actions/checkout@v2
+
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v2
+        with:
+          repository: th3cyb3rhub/TheCyberHUB
+          ref: gh-pages
+          path: gh-pages  # Check out into a subdirectory
+
+      - name: Copy content from gh-pages to current directory
+        run: |
+          if (Test-Path "gh-pages") {
+              Copy-Item -Recurse -Force "gh-pages/*" "."
+          } else {
+              Write-Host "gh-pages directory does not exist."
+          }
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
