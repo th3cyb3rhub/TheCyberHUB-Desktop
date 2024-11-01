@@ -16,7 +16,7 @@ jobs:
       - name: Checkout TheCyberHUB-Desktop code
         uses: actions/checkout@v2
 
-      - name: Checkout thecyberhub gh-pages code
+      - name: Checkout TheCyberHUB gh-pages code
         uses: actions/checkout@v2
         with:
           repository: th3cyb3rhub/TheCyberHUB  # Replace with your GitHub username and repo name
@@ -49,4 +49,4 @@ jobs:
           files: |
             dist/mac/*.dmg  # Adjust this to your actual build output
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Make the token available in the environment
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
