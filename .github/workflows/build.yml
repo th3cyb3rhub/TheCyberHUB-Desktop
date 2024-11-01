@@ -39,19 +39,39 @@ jobs:
           # Copy necessary files into the dist directory
           Copy-Item -Recurse -Path "temp/*" -Destination "dist" -Force
 
+      - name: Backup JS files before modifying
+        run: |
+          # Create a backup of the original JS files
+          Copy-Item -Recurse -Path "dist\assets\*.js" -Destination "dist\assets\backup" -Force
+
       - name: Update paths in HTML and JS files
         run: |
           # Update paths in HTML files
           Get-ChildItem dist\*.html | ForEach-Object {
-              (Get-Content $_.FullName) `
+              $filePath = $_.FullName
+              $content = Get-Content $filePath
+              $newContent = $content `
                   -replace 'src="(/assets/)', 'src="./assets/' `
-                  -replace 'href="(/assets/)', 'href="./assets/' | Set-Content $_.FullName
+                  -replace 'href="(/assets/)', 'href="./assets/'
+              Set-Content -Path $filePath -Value $newContent
+
+              # Log the changes for debugging
+              if ($newContent -ne $content) {
+                  Write-Host "Updated asset paths in $filePath"
+              }
           }
           
           # Update paths in JS files inside the assets folder
           Get-ChildItem dist\assets\*.js | ForEach-Object {
-              (Get-Content $_.FullName) `
-                  -replace '("/assets/)', '("./assets/' | Set-Content $_.FullName
+              $filePath = $_.FullName
+              $content = Get-Content $filePath
+              $newContent = $content -replace '("/assets/)', '("./assets/'
+
+              # Log the changes for debugging
+              if ($newContent -ne $content) {
+                  Write-Host "Updating asset paths in $filePath"
+              }
+              Set-Content -Path $filePath -Value $newContent
           }
 
       - name: List files in the dist directory after copying
