@@ -20,12 +20,15 @@
       "dist/**/*",
       "src/main.js"
     ],
-    "icon": "dict/assets/th3cyb3rhub-fav.png",
     "win": {
+      "icon": "th3cyb3rhub-fav.ico",
       "target": [
         "nsis"
       ],
       "sign": false
+    },
+    "mac": {
+      "icon": "th3cyb3rhub-fav.icns"
     },
     "publish": {
       "provider": "github",
